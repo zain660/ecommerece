@@ -12,10 +12,11 @@
     <link rel="icon" href="{{showImage(app('general_setting')->favicon)}}" type="image/png">
     @php
         $themeColor = Modules\Appearance\Entities\ThemeColor::where('status',1)->first();
+       
         if($themeColor->id == 1){
             $themeColor = (object)[
                 'background_color' => '#fff',
-                'base_color' => '#FF2732',
+                'base_color' => ''.$themeColor->base_color.'',
                 'text_color' => '#00124e',
                 'feature_color' => '#fff',
                 'footer_background_color' => '#000',
@@ -27,6 +28,8 @@
                 'warning_color' => '#E09079',
                 'danger_color' => '#FF6D68',
             ];
+
+            // dd($themeColor->base_color);
         }
     @endphp
     <style>
@@ -216,4 +219,82 @@
         const _config = {!!  json_encode(collect(app('general_setting'))->only(['currency_symbol','decimal_limit','currency_symbol_position']))  !!};
         const _user_currency = {!!  json_encode(collect(app('user_currency'))->only(['symbol','convert_rate']))  !!};
     </script>
+
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-database.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": false,
+        "positionClass": "toast-bottom-left",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
+
+@if(Auth::check())
+<script>
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = { 
+        apiKey: "AIzaSyDmwVnCg4QfnIY8QiHN7aXE10HMAynLAJg",
+        authDomain: "joshua-5cd76.firebaseapp.com",
+        databaseURL: "https://joshua-5cd76-default-rtdb.firebaseio.com/",
+        projectId: "joshua-5cd76",
+        storageBucket: "joshua-5cd76.appspot.com",
+        messagingSenderId: "324957241834",
+        appId: "1:324957241834:web:232afc997696f6816d3293",
+        measurementId: "G-1D8DBWSBPM"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    var ref = firebase.database().ref("user_id_{{ auth()->user()->id }}/web_notification");
+
+    let newItems = false;
+    ref.on('child_added', function(snapshot) { 
+
+        $('#notifiy').append(blockkks);
+
+        if (!newItems) {
+            return
+        }
+
+        toastr.options.progressBar = false;
+        console.log(snotificaton);
+        if (snotificaton.blocked == "1" || snotificaton.un_blocked == "1") {
+            location.reload();
+        } else {
+            toastr.success('<a href=' + snotificaton.url + '>' + snotificaton.text + '</a>');
+
+        }
+
+    });
+
+
+    ref.once('value', () => {
+        newItems = true
+    })
+</script>
+@endif
+
+
 </head>

@@ -101,6 +101,7 @@ class GeneralSettingController extends Controller
 
     public function update(Request $request)
     {
+        // dd($request->vendor_type);
 
         if ($request->has('status')) {
             $request->validate([
@@ -141,9 +142,9 @@ class GeneralSettingController extends Controller
         }
         if($request->has('vendor_type')){
            $module =  \Nwidart\Modules\Facades\Module::find("MultiVendor");
-
+                // dd($module);
            if($request->vendor_type == 1){
-             $module->enable();
+            $module->enable();
            }else{
              $module->disable();
            }

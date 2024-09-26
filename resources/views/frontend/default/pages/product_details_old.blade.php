@@ -20,8 +20,7 @@
         </style>
     @endif
 
-@endsection
-
+@endsection 
 @section('title')
     @if(@$product->product->meta_title != null)
         {{ @substr(@$product->product->meta_title,0, 60)}}

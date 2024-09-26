@@ -38,5 +38,5 @@
     "Utilities": true,
     "PageBuilder": true,
     "FormBuilder": true,
-    "MultiVendor": false
+    "MultiVendor": true
 }

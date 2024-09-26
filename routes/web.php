@@ -34,6 +34,7 @@ use Modules\GeneralSetting\Entities\EmailTemplateType;
 use App\Http\Controllers\Frontend\NewUserZoneController;
 use App\Http\Controllers\Auth\MerchantRegisterController;
 use App\Http\Controllers\DemoController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Frontend\NotificationController;
 use App\Http\Controllers\Frontend\ProductReviewController;
 use App\Http\Controllers\Frontend\SupportTicketController;
@@ -64,6 +65,12 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard-cards-info/{type}', [ProfileController::class, 'dashboardCards'])->name('dashboard.card.info');
 });
 Route::post('search',[SearchController::class,'search'])->name('routeSearch');
+
+// Chat routes
+Route::get('/chat/home',[ChatController::class,'index'])->name('frontend.chat.home');
+Route::get('/chat/conversation/{id}/{pro_id}',[ChatController::class,'conversation'])->name('frontend.chat.conversation');
+Route::post('/chat/send_message/{seller_id}/{pro_id}',[ChatController::class,'send_message'])->name('frontend.chat.send_message');
+
 //for category page
 Route::get('/category',[CategoryController::class,'index'])->name('frontend.category');
 Route::get('category/fetch_data', [CategoryController::class,'fetchPagenateData'])->name('frontend.category.fetch-data');

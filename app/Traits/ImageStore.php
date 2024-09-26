@@ -250,7 +250,9 @@ public static function saveSettingsImage($image, $height = null ,$lenght = null)
             }
         }
         $img_name = 'uploads/settings'.'/'.uniqid().'.'.$image_extention;
-        $img_save = asset_path($img_name);
+        $img_save = public_path($img_name);
+ 
+        // dd(public_path($img_save));
         $img->save($img_save);
         return $img_name;
     }else{

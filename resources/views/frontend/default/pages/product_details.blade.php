@@ -73,6 +73,7 @@
 @endsection
 
 @section('content')
+
 <!-- product details here -->
 <section class="product_details_part section_padding">
     <div class="container">

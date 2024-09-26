@@ -132,7 +132,8 @@
     <input type="hidden" value="{{$row->id}}" id="row_id">
 @endsection
 @push('scripts')
-    <script src="{{asset('Modules/FormBuilder/Resources/assets/js/form-builder.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-formBuilder/3.19.12/form-builder.min.js" integrity="sha512-BJgdIysRY0n0yHhYYYcprRHp3v2M1FUhlmSzbDCKVvNjKli+9N/vcxasDxi3I1t5ONr9lcCTY3ZG4qYRBl6SDw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-formBuilder/3.19.12/form-render.min.js" integrity="sha512-OoCLYQjhw+ggJ9fwYgFLOCXxld4zun/1m885AUDlPfdH2HjN7tNZsF0Uw2SU40OHt7vKOgGAogZkAC+xWv6Dnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         (function($) {
             "use strict";
